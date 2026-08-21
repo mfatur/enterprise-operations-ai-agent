@@ -2,7 +2,10 @@
 name = "enterprise-operations-ai-agent"
 version = "1.0.0"
 requires-python = ">=3.13,<3.14"
-dependencies = []
+dependencies = [
+    "fastapi[standard]==0.128.8",
+    "uvicorn==0.39.0"
+]
 
 [tool.fastapi]
 entrypoint = "backend.app.main:app"
