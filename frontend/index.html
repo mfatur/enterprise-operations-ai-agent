@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Enterprise Operations AI Agent</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header class="header">
+            <div>
+                <h1>Sales Intelligence</h1>
+                <p>Enterprise Operations AI Agent</p>
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                AI Agent Ready
+            </div>
+        </header>
+
+
+        <!-- KPI -->
+
+        <section class="kpi-grid">
+
+            <div class="kpi-card">
+                <span class="kpi-label">
+                    Total Revenue
+                </span>
+
+                <h2 id="revenueValue">
+                    Loading...
+                </h2>
+            </div>
+
+
+            <div class="kpi-card">
+                <span class="kpi-label">
+                    Products Sold
+                </span>
+
+                <h2 id="quantityValue">
+                    Loading...
+                </h2>
+            </div>
+
+
+            <div class="kpi-card">
+                <span class="kpi-label">
+                    Average Order Value
+                </span>
+
+                <h2 id="averageOrderValue">
+                    Loading...
+                </h2>
+            </div>
+
+        </section>
+
+
+        <!-- Suggested Questions -->
+
+        <section class="suggestions">
+
+            <div class="section-title">
+                <h3>Suggested Questions</h3>
+            </div>
+
+            <div class="suggestion-list">
+
+                <button class="suggestion-btn">
+                    Berapa total revenue?
+                </button>
+
+                <button class="suggestion-btn">
+                    Berapa total produk yang terjual?
+                </button>
+
+                <button class="suggestion-btn">
+                    Apa 3 produk terlaris?
+                </button>
+
+                <button class="suggestion-btn">
+                    Berapa rata-rata nilai order?
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Analytics -->
+
+        <section class="analytics-grid">
+
+            <div class="analytics-card">
+
+                <div class="analytics-header">
+                    <h3>Top Products</h3>
+                    <span>Units Sold</span>
+                </div>
+
+                <div class="chart-container">
+    <canvas id="topProductsChart"></canvas>
+</div>
+
+<div id="topProducts"></div>
+            </div>
+
+
+            <div class="analytics-card">
+
+                <div class="analytics-header">
+                    <h3>Revenue by Region</h3>
+                    <span>Revenue</span>
+                </div>
+
+                <div class="chart-container">
+    <canvas id="revenueByRegionChart"></canvas>
+</div>
+
+<div id="revenueByRegion"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- AI Chat -->
+
+        <section class="chat-card">
+
+            <div class="chat-header">
+
+                <div>
+                    <h3>Sales AI Agent</h3>
+                    <p>
+                        Ask questions about your sales data
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div
+                id="chatMessages"
+                class="chat-messages"
+            >
+
+                <div class="message assistant">
+                    <div class="message-content">
+                        Halo! Saya Sales AI Agent.
+                        Silakan tanyakan sesuatu
+                        tentang data penjualan.
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="chat-input-area">
+
+                <input
+                    type="text"
+                    id="questionInput"
+                    placeholder="Tanyakan tentang data penjualan..."
+                    autocomplete="off"
+                >
+
+                <button
+                    id="sendButton"
+                    type="button"
+                >
+                    Kirim
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
