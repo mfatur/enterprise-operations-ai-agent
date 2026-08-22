@@ -2,6 +2,7 @@ from pathlib import Path
 from fastapi.responses import FileResponse
 
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from langchain_core.messages import HumanMessage
@@ -195,3 +196,15 @@ def dashboard():
             status_code=500,
             detail="Gagal mengambil data dashboard."
         )
+# =========================
+# FRONTEND STATIC FILES
+# =========================
+
+app.mount(
+    "/",
+    StaticFiles(
+        directory=FRONTEND_DIR,
+        html=True,
+    ),
+    name="frontend",
+)
