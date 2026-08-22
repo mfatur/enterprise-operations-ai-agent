@@ -4,7 +4,12 @@ version = "1.0.0"
 requires-python = ">=3.13,<3.14"
 dependencies = [
     "fastapi[standard]==0.128.8",
-    "uvicorn==0.39.0"
+    "langchain-core==1.5.3",
+    "langchain-google-genai==2.1.12",
+    "langgraph==0.6.11",
+    "google-genai==1.47.0",
+    "psycopg[binary]==3.2.13",
+    "python-dotenv==1.2.1",
 ]
 
 [tool.fastapi]
