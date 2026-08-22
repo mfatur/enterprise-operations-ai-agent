@@ -1,3 +1,6 @@
+from pathlib import Path
+from fastapi.responses import FileResponse
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -17,6 +20,7 @@ app = FastAPI(
     version="1.0.0",
 )
 
+FRONTEND_DIR = Path(__file__).resolve().parents[2] / "frontend"
 
 # =========================
 # CORS
@@ -52,9 +56,9 @@ class ChatRequest(BaseModel):
 
 @app.get("/")
 def root():
-    return {
-        "message": "Enterprise Operations AI Agent is running"
-    }
+    return FileResponse(
+        FRONTEND_DIR / "index.html"
+    )
 
 
 # =========================
