@@ -134,10 +134,11 @@ h1, h2, h3 {
 }
 
 .kpi-card h2 {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 700;
     font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
 }
 
 
@@ -253,12 +254,11 @@ h1, h2, h3 {
 }
 
 .analytics-value {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
     font-size: 13px;
     font-weight: 600;
     color: var(--ink);
 }
-
 .empty-state {
     color: #9ca3af;
     font-size: 13px;
