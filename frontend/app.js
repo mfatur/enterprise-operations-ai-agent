@@ -260,6 +260,13 @@ function renderTopProducts(products) {
         );
 
 
+    const barCtx = canvas.getContext("2d");
+    const barGradient = barCtx.createLinearGradient(0, 0, 0, 260);
+    barGradient.addColorStop(0, "#2563EB");
+    barGradient.addColorStop(1, "#2563EB");
+
+    Chart.defaults.font.family = "'Inter', sans-serif";
+
     topProductsChart =
         new Chart(
             canvas,
@@ -275,7 +282,13 @@ function renderTopProducts(products) {
 
                             data: values,
 
-                            borderWidth: 1
+                            backgroundColor: barGradient,
+
+                            borderRadius: 6,
+
+                            maxBarThickness: 64,
+
+                            borderWidth: 0
                         }
                     ]
                 },
@@ -295,8 +308,23 @@ function renderTopProducts(products) {
                         y: {
                             beginAtZero: true,
 
+                            grid: {
+                                color: "#EEF0F5"
+                            },
+
                             ticks: {
-                                precision: 0
+                                precision: 0,
+                                color: "#6B7080"
+                            }
+                        },
+
+                        x: {
+                            grid: {
+                                display: false
+                            },
+
+                            ticks: {
+                                color: "#12141C"
                             }
                         }
                     }
@@ -409,6 +437,13 @@ function renderRevenueByRegion(regions) {
         );
 
 
+    const regionCtx = canvas.getContext("2d");
+    const regionGradient = regionCtx.createLinearGradient(0, 0, 260, 0);
+    regionGradient.addColorStop(0, "#2563EB");
+    regionGradient.addColorStop(1, "#2563EB");
+
+    Chart.defaults.font.family = "'Inter', sans-serif";
+
     revenueByRegionChart =
         new Chart(
             canvas,
@@ -424,7 +459,13 @@ function renderRevenueByRegion(regions) {
 
                             data: values,
 
-                            borderWidth: 1
+                            backgroundColor: regionGradient,
+
+                            borderRadius: 6,
+
+                            maxBarThickness: 32,
+
+                            borderWidth: 0
                         }
                     ]
                 },
@@ -459,7 +500,12 @@ function renderRevenueByRegion(regions) {
                         x: {
                             beginAtZero: true,
 
+                            grid: {
+                                color: "#EEF0F5"
+                            },
+
                             ticks: {
+                                color: "#6B7080",
                                 callback:
                                     function(value) {
 
@@ -468,6 +514,16 @@ function renderRevenueByRegion(regions) {
                                         );
 
                                     }
+                            }
+                        },
+
+                        y: {
+                            grid: {
+                                display: false
+                            },
+
+                            ticks: {
+                                color: "#12141C"
                             }
                         }
                     }
