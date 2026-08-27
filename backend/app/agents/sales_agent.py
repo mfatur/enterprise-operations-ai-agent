@@ -26,12 +26,13 @@ from backend.app.tools.sales_tools import (
 )
 
 
-logger = logging.getLogger(__name__)
-
-
 load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+if not GEMINI_API_KEY:
+    logger.error("GEMINI_API_KEY environment variable is not set. Set GEMINI_API_KEY to use the Gemini model.")
+    raise ValueError("GEMINI_API_KEY environment variable is required")
 
 
 class AgentState(TypedDict):

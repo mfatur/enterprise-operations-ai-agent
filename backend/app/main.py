@@ -7,6 +7,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from langchain_core.messages import HumanMessage
 
+import logging
+logger = logging.getLogger(__name__)
+
 from backend.app.agents.sales_agent import sales_agent
 from backend.app.tools.sales_tools import (
     get_total_revenue,
@@ -79,35 +82,38 @@ def chat(request: ChatRequest):
                 detail="Question tidak boleh kosong."
             )
 
-        print(f"[CHAT] Question: {question}")
+        logger.info(f"[CHAT] Question: {question}")
 
         result = sales_agent.invoke(
             {
                 "messages": [
-                    HumanMessage(
-                        content=question
-                    )
+                    HumanMessage(content=question)
                 ]
             }
         )
 
+        if not result or "messages" not in result or not result["messages"]:
+            logger.error("Invalid response from sales_agent: %s", result)
+            raise HTTPException(status_code=502, detail="Invalid response from AI agent")
+
         final_message = result["messages"][-1]
 
-        if isinstance(final_message.content, list):
+        # support both attribute and dict-like message shapes
+        content = getattr(final_message, "content", None)
+        if content is None and isinstance(final_message, dict):
+            content = final_message.get("content")
 
-            answer = ""
-
-            for block in final_message.content:
-
-                if block.get("type") == "text":
-                    answer += block["text"]
-
+        if isinstance(content, list):
+            answer_parts = []
+            for block in content:
+                if isinstance(block, dict) and block.get("type") == "text":
+                    answer_parts.append(block.get("text", ""))
+            answer = "".join(answer_parts)
         else:
+            answer = content
 
-            answer = final_message.content
 
-
-        print(f"[CHAT] Answer: {answer}")
+        logger.info(f"[CHAT] Answer: {answer}")
 
         return {
             "answer": answer
@@ -122,7 +128,7 @@ def chat(request: ChatRequest):
 
         error_message = str(e)
 
-        print(f"[ERROR] {error_message}")
+        logger.exception(f"[ERROR] {error_message}")
 
 
         if (
@@ -188,9 +194,7 @@ def dashboard():
 
     except Exception as e:
 
-        print(
-            f"[DASHBOARD ERROR] {str(e)}"
-        )
+        logger.exception("[DASHBOARD ERROR] %s", str(e))
 
         raise HTTPException(
             status_code=500,

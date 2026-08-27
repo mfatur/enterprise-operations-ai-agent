@@ -29,3 +29,5 @@ logs/
 Thumbs.db
 # Database backup
 orders_backup.sql
+.env.local
+.env.local.backup

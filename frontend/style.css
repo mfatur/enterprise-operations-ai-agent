@@ -1,4 +1,25 @@
 :root {
+    /* Dark theme (default) */
+    --bg: #05080e;            /* page background */
+    --surface: #0F1724;       /* cards / surfaces */
+    --border: #172033;        /* subtle borders */
+    --ink: #E6EEF3;           /* primary text */
+    --muted: #9AA6B2;         /* secondary text */
+    --indigo: #7C3AED;        /* brand accent */
+    --indigo-soft: rgba(124,58,237,0.08);
+    --teal: #14B8A6;          /* success / accent */
+    --teal-soft: rgba(20,184,166,0.06);
+    --accent: #2563EB;        /* primary CTA */
+    --accent-strong: #1D4ED8;
+    --chat-bg: #071022;       /* chat panel background */
+    --input-bg: #0B1220;      /* input background */
+    --assistant-bg: rgba(255,255,255,0.04);
+    --user-bg: #0ea570;       /* user message */
+    --card-shadow: 0 10px 30px rgba(2,6,23,0.6);
+}
+
+/* Light theme overrides */
+[data-theme="light"] {
     --bg: #F5F6FA;
     --surface: #FFFFFF;
     --border: #E5E7F0;
@@ -8,6 +29,13 @@
     --indigo-soft: #EEF0FF;
     --teal: #0EA5A0;
     --teal-soft: #E6F8F7;
+    --accent: #2563EB;
+    --accent-strong: #1E40AF;
+    --chat-bg: #FAFAFD;
+    --input-bg: #FAFAFD;
+    --assistant-bg: rgba(0,0,0,0.04);
+    --user-bg: #0ea570;
+    --card-shadow: 0 6px 18px rgba(2,6,23,0.08);
 }
 
 * {
@@ -31,7 +59,7 @@ h1, h2, h3 {
 .container {
     width: min(1200px, calc(100% - 40px));
     margin: 0 auto;
-    padding: 36px 0 80px;
+    padding: 20px 0 12px;
 }
 
 
@@ -63,14 +91,13 @@ h1, h2, h3 {
     gap: 8px;
     font-size: 13px;
     font-weight: 600;
-    color: #0B7C78;
+    color: var(--teal);
     background: var(--teal-soft);
-    border: 1px solid #BFEAE7;
+    border: 1px solid rgba(20,184,166,0.12);
     padding: 7px 14px;
     border-radius: 99px;
     white-space: nowrap;
 }
-
 .status-dot {
     width: 7px;
     height: 7px;
@@ -120,7 +147,7 @@ h1, h2, h3 {
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
-    background: black;
+    background: white;
 }
 
 .kpi-label {
@@ -289,7 +316,7 @@ h1, h2, h3 {
     height: 34px;
     flex-shrink: 0;
     border-radius: 9px;
-    background: linear-gradient(135deg, var(--indigo), #000000);
+    background: black;
     color: #fff;
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
@@ -317,7 +344,7 @@ h1, h2, h3 {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    background: #FAFAFD;
+    background:var(--surface);
 }
 
 .message {
@@ -341,15 +368,16 @@ h1, h2, h3 {
 }
 
 .message.user .message-content {
-    background: #0ea570;
+    background: var(--user-bg);
     color: white;
     border-bottom-right-radius: 4px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
 }
 
 .message.assistant .message-content {
-    background: rgb(105, 105, 105);
-    border: 1px solid #DCDFFF;
-    color: rgb(255, 255, 255);
+    background: var(--assistant-bg);
+    border: 1px solid var(--border);
+    color: var(--ink);
     border-bottom-left-radius: 4px;
 }
 
@@ -368,13 +396,14 @@ h1, h2, h3 {
 .chat-input-area input {
     flex: 1;
     border: 1px solid var(--border);
-    background: #FAFAFD;
+    background: var(--input-bg);
     border-radius: 10px;
     padding: 11px 14px;
     outline: none;
     font-size: 14px;
     font-family: 'Inter', sans-serif;
-    transition: border-color .15s;
+    transition: border-color .15s, background .15s;
+    color: var(--ink);
 }
 
 .chat-input-area input:focus {
@@ -385,19 +414,36 @@ h1, h2, h3 {
     border: none;
     border-radius: 10px;
     padding: 0 22px;
-    background: var(--ink);
+    background: var(--accent-strong);
     color: white;
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
     font-family: 'Inter', sans-serif;
-    transition: background .15s;
+    transition: background .15s, transform .05s;
 }
 
 .chat-input-area button:hover {
-    background: var(--indigo);
+    background: var(--accent);
+    transform: translateY(-1px);
 }
 
+.theme-toggle {
+    margin-left: 12px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--ink);
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 .chat-input-area button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
